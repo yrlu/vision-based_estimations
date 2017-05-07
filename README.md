@@ -1,12 +1,12 @@
-## Vision-based Pose and Velocities Estimation
+## Vision-based 3D Pose and Velocities Estimation
 
 <img src="imgs/p2p1_dataset4_trimmed.gif" alt="step" width="800">
 
 Following [MEAM 620 Advanced Robotics](https://alliance.seas.upenn.edu/~meam620/wiki/) course at University of Pennsylvania. 
 
 This repo includes matlab code:
-- Vision-based pose estimation
-- Vision-based (linear & angular) velocity estimation
+- Vision-based 3D pose estimation
+- Vision-based 3D (linear & angular) velocity estimation
 - Kalman Filters
 - Useful tool functions for quaternion operations (`quat/`)
 
