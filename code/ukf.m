@@ -6,7 +6,7 @@ function [s] = ukf(q, omg, t)
 %          - omg:   current estimation of the angular velocity (omega)
 %          - t:     sensor timestamp
 % @outputs:
-%       s       7x1 vector containing 4x 1quaternion represeting the
+%       s       7x1 vector containing 4x1 quaternion represeting the
 %               orientation and the 3x1 angular velocity
 
 % @author   Yiren Lu

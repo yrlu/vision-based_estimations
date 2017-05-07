@@ -11,3 +11,13 @@ This repo includes matlab code:
 - Useful tool functions for quaternion operations (`quat/`)
 
 Check `refs/` for references that I found useful.
+
+#### Plots
+
+- position and orientation
+
+<img src="imgs/kf_ds1_pos.jpg" alt="step" width="420"> <img src="imgs/kf_ds1_ori.jpg" alt="step" width="420">
+
+- linear and angular velocities
+
+<img src="imgs/kf_ds1_vel.jpg" alt="step" width="420"> <img src="imgs/kf_ds1_omg.jpg" alt="step" width="420">

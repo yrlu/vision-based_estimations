@@ -2,7 +2,7 @@
 function plot_vel_omg(vels, omgs, vicon_vels, vicon_omgs, ts)
 disp 'plot velocities';
 start = 1;
-figure(1); 
+figure; 
 subplot(4,1,1); 
 plot(ts(start:end), vels(1,start:end));
 hold on;
@@ -36,7 +36,7 @@ vel_err_xyz = sum((vels - vicon_vels).^2,2)/size(vicon_vels, 2);
 vel_err = mean(sum((vels - vicon_vels).^2,2)/size(vicon_vels, 2));
 
 
-figure(2);
+figure;
 subplot(4,1,1);
 plot(ts(start:end), omgs(1,start:end));
 hold on;

@@ -4,7 +4,7 @@ clc;
 addpath(genpath('./'));
 
 %% check data format
-load('data/studentdata4.mat');
+load('data/studentdata1.mat');
 
 %%
 vels = zeros(3, numel(data));
@@ -19,6 +19,9 @@ ori = zeros(3, numel(data));
 vicon_pos = zeros(3, numel(data));
 vicon_ori = zeros(3, numel(data));
 %%
+
+USE_EKF1 = 0;
+
 tic
 % for i = 1:numel(data)
 n_tags = zeros(1, numel(data));
@@ -33,12 +36,16 @@ for i = 1:numel(data)
         vic.t = data(i).t;
         vic.vel = vicon_v(7:12);
 %         ekf1 uses vicon's velocities data as measurements
-%         [X, Z, rpy] = ekf1(data(i), vic);
-
+        if USE_EKF1 == 1
+            [X, Z, rpy] = ekf1(data(i), vic);
+            [vel, omg] = estimate_vel(data(i));
+        else 
 %         ekf2 uses vison-based velocities estimations as measurements
 %         UKF enclosed, please check the flag USE_UKF in ekf2()
-        [X, Z, rpy] = ekf2(data(i));
-        [vel, omg] = estimate_vel(data(i));
+            [X, Z, rpy, omg] = ekf2(data(i));
+            vel = X(4:6);
+        end
+        
         vels(:, i) = vel;
         omgs(:, i) = omg;
         pos(:, i) = X(1:3);
@@ -53,5 +60,7 @@ end
 toc
 
 %% 
+plot_vel_omg(vels, omgs, vicon_vels, vicon_omgs, ts);
 plotpos(pos, vicon_pos, ts, n_tags);
 plotrpy(ori, vicon_ori, ts, n_tags);
+

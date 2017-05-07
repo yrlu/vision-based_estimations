@@ -1,4 +1,4 @@
-function [X, Z, rpy] = ekf2(sensor, varargin)
+function [X, Z, rpy, omg] = ekf2(sensor, varargin)
 % EKF2 Extended Kalman Filter with IMU as inputs
 %
 % INPUTS:
@@ -58,6 +58,7 @@ if isempty(A) | oldt > sensor.t
     X = zeros(10,1);
     Z = zeros(7,1);
     rpy = zeros(3,1);
+    omg = zeros(3,1);
     
     oldX = X;
     oldZ = Z;
@@ -99,6 +100,7 @@ end
 X = [mu(1:3);vel; s(1:4)];
 [yaw, pitch, roll] = quat2angle(s(1:4)');
 rpy = [roll, pitch, yaw];
+omg = s(5:7);
 return
 end
 

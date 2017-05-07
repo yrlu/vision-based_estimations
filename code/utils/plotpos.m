@@ -1,6 +1,6 @@
 function plotpos(xyz, xyz_vicon, ts, n_tags)
 disp 'plot positions';
-figure(1);
+figure;
 
 start = 200;
 xyz = xyz(:, start:end);
