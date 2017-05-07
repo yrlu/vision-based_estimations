@@ -1,7 +1,7 @@
 %% 
-addpath ../data;
-addpath ../quat;
-addpath ./utils;
+clear;
+clc;
+addpath(genpath('./'));
 
 %% check data format
 load('data/studentdata4.mat');
