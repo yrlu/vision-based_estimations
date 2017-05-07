@@ -68,7 +68,6 @@ if isempty(oldSensor) | oldSensor.t > sensor.t
     cam_invK = inv(cam_K);
     
     % estimate poses
-%     [Tw_b, q, Rc_w, Tc_w, Rw_c, Tw_c, pts_w, pts_c] = estimate_pose(sensor);
     [Rc_w, Tc_w] = estimate_cam_pose(sensor, cam_invK);
     [Xc, Yc, Zc, ~] = get_XYZc(Rc_w, Tc_w, points, invK);
     
@@ -92,22 +91,13 @@ ids = points(:,1) > w*0.12 & points(:,1) < w*0.88 & points(:,2) > h*0.12 & point
 points = points(ids,:);
 
 % estimate pose
-% tic
-% [Tw_b, q, Rc_w, Tc_w, Rw_c, Tw_c, pts_w, pts_c] = estimate_pose(sensor);
 [Rc_w, Tc_w] = estimate_cam_pose(sensor, cam_invK);
 [Xc, Yc, Zc, ~] = get_XYZc(Rc_w, Tc_w, points, invK);
 alpha = 0.05;
 % dt = sensor.t - oldSensor.t;
 dt = alpha*(sensor.t - oldSensor.t) + (1-alpha)*olddt;
-% framei
-% dt = 0.02;
-% toc
-% tic
 x = Xc./Zc;
 y = Yc./Zc;
-
-% oldx = oldXc./oldZc;
-% oldy = oldYc./oldZc;
 
 oldx = oldXc(ids)./oldZc(ids);
 oldy = oldYc(ids)./oldZc(ids);
@@ -118,9 +108,8 @@ dot_y = [y - oldy]'./dt;
 A_all = get_A(x',y',Zc');
 % v_omega_c = A_all\[dot_x;dot_y];
 v_omega_c = ransac(A_all, x, y, Zc, dot_x, dot_y);
-% toc
-% tic
 % redetect the points
+
 % if mod(framei, 2) == 0 | size(points,1) < 100
 if mod(framei, 2) == 0
 % if size(points,1) < 140
@@ -138,7 +127,7 @@ points = points(ids,:);
 [Xc, Yc, Zc, ~] = get_XYZc(Rc_w, Tc_w, points, invK);
 end
 setPoints(pointTracker, points);
-% toc
+
 % display
 % if mod(framei, 1) == 0
 % plot_data3(sensor, Rw_b, Tw_b, points, XYZw);

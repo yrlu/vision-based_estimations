@@ -1,4 +1,4 @@
-## Vision-based pose and velocity estimation
+## Vision-based Pose and Velocities Estimation
 
 <img src="imgs/p2p1_dataset4_trimmed.gif" alt="step" width="800">
 
