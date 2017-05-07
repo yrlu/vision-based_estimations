@@ -1,0 +1,7 @@
+*.DS_Store
+data/*
+*~
+*.mat
+*.zip
+*.avi
+*.mov
